@@ -90,9 +90,13 @@ test("removes an item from the list when the delete button is clicked", async ()
   expect(yogurt).toBeInTheDocument();
 
   const deleteButtons = await screen.findAllByText(/Delete/);
+  
   fireEvent.click(deleteButtons[0]);
 
+  console.log("Element to be removed:",screen.queryByText(/Yoghurt/));
+
   await waitForElementToBeRemoved(() => screen.queryByText(/Yogurt/));
+  console.log("Element removed:", screen.queryByText(/Yogurt/));
 
   // Rerender the component to ensure the item was persisted
   rerender(<ShoppingList />);
